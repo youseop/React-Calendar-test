@@ -1,0 +1,80 @@
+/* styles/Calendar.module.css */
+.react-calendar {
+  width: 100%;
+  max-width: 800px; /* 너비를 800px로 설정 */
+  background: white;
+  border: none;
+  font-family: "Arial", sans-serif;
+  line-height: 1.125em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 0 auto; /* 가운데 정렬을 위해 추가 */
+}
+
+.react-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.react-calendar__navigation button {
+  background: none;
+  border: none;
+  color: #333;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: #f0f0f0;
+}
+
+.react-calendar__month-view__weekdays {
+  display: flex;
+  justify-content: space-around;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  color: #888;
+  margin-bottom: 0.5em;
+}
+
+.react-calendar__month-view__days {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.react-calendar__tile {
+  max-width: 14.2857%;
+  text-align: center;
+  padding: 1em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.react-calendar__tile:disabled {
+  background-color: #f0f0f0;
+  color: #d3d3d3;
+  cursor: not-allowed;
+}
+
+.react-calendar__tile--active {
+  background: #007bff;
+  color: white;
+  border-radius: 8px;
+}
+
+.react-calendar__tile--active:hover,
+.react-calendar__tile--active:focus {
+  background: #0056b3;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background: #f0f0f0;
+  border-radius: 8px;
+}
