@@ -9,6 +9,7 @@ const Dashboard: React.FC = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [showModal, setShowModal] = useState(false);
   const [lessonTime, setLessonTime] = useState<string | null>(null);
+  const [isPast, setIsPast] = useState(false);
 
   const getDayIndex = (day: string) => {
     const days = [
@@ -24,18 +25,24 @@ const Dashboard: React.FC = () => {
   };
 
   const handleDateChange = (date: Date | null) => {
+    if (!date) return;
+
     setSelectedDate(date);
-    if (date) {
-      const lesson = lessons.find(
-        (lesson) => date.getDay() === getDayIndex(lesson.day)
-      );
-      if (lesson) {
-        setLessonTime(lesson.time);
-      } else {
-        setLessonTime(null);
-      }
-      setShowModal(true);
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    setIsPast(date < today);
+
+    const lesson = lessons.find(
+      (lesson) => date.getDay() === getDayIndex(lesson.day)
+    );
+    if (lesson) {
+      setLessonTime(lesson.time);
+    } else {
+      setLessonTime(null);
     }
+
+    setShowModal(true);
   };
 
   const handleChangeSchedule = () => {
@@ -60,6 +67,7 @@ const Dashboard: React.FC = () => {
         onClose={() => setShowModal(false)}
         lessonTime={lessonTime}
         onChangeSchedule={handleChangeSchedule}
+        isPast={isPast}
       />
     </div>
   );

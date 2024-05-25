@@ -7,6 +7,7 @@ interface ModalProps {
   onClose: () => void;
   lessonTime: string | null;
   onChangeSchedule: () => void;
+  isPast: boolean;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -14,6 +15,7 @@ const Modal: React.FC<ModalProps> = ({
   onClose,
   lessonTime,
   onChangeSchedule,
+  isPast,
 }) => {
   const router = useRouter();
 
@@ -27,11 +29,6 @@ const Modal: React.FC<ModalProps> = ({
     }
   };
 
-  const handleChangeSchedule = () => {
-    onClose();
-    router.push("/schedule");
-  };
-
   return (
     <div className={styles.modalOverlay} onClick={handleOverlayClick}>
       <div className={styles.modalContent}>
@@ -39,7 +36,18 @@ const Modal: React.FC<ModalProps> = ({
         {lessonTime ? (
           <>
             <p>Lesson Time: {lessonTime}</p>
-            <button onClick={handleChangeSchedule}>Change Schedule</button>
+            {isPast ? (
+              <p>수업을 잘 완료했습니다.</p>
+            ) : (
+              <button
+                onClick={() => {
+                  onClose();
+                  router.push("/schedule");
+                }}
+              >
+                Change Schedule
+              </button>
+            )}
           </>
         ) : (
           <p>No lesson scheduled.</p>

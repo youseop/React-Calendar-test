@@ -47,13 +47,16 @@ const CustomCalendar: React.FC<CalendarProps> = ({
 
   const tileContent = ({ date, view }: { date: Date; view: string }) => {
     if (view === "month" && isLessonDay(date)) {
-      return <p>{getLessonTime(date)} - 수업</p>;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return <p>{date < today ? "완료" : `${getLessonTime(date)} - 수업`}</p>;
     }
     return null;
   };
 
   const tileDisabled = ({ date, view }: { date: Date; view: string }) => {
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
     const isToday =
       date.getFullYear() === today.getFullYear() &&
       date.getMonth() === today.getMonth() &&
